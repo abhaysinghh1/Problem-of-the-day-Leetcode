@@ -1,0 +1,54 @@
+class Solution {
+public:
+    typedef long long ll;
+    typedef pair<int,int> p;
+    ll minimumCost(vector<int>& nums, int k, int dist) {
+          int n=nums.size();
+          set<p>K_minimun;
+          set<p>remaining;
+          ll sum=0;
+          int i=1;
+          while(i-dist<1){
+            K_minimun.insert({nums[i],i});
+            sum+=nums[i];
+            if(K_minimun.size()>(k-1)){
+                p temp=*K_minimun.rbegin();
+                sum-=temp.first;
+                remaining.insert(temp);
+                K_minimun.erase(temp);
+
+            }
+            i++;
+          }
+           ll res= LONG_MAX;
+           while(i<n){
+            K_minimun.insert({nums[i],i});
+            sum+=nums[i];
+            if(K_minimun.size()>(k-1)){
+                p temp=*K_minimun.rbegin();
+                sum-=temp.first;
+                remaining.insert(temp);
+                K_minimun.erase(temp);
+
+            }
+            res=min(res,sum);
+            p remove={ nums[i-dist],i-dist};
+            if(K_minimun.count(remove)){
+                K_minimun.erase(remove);
+                sum-=remove.first;
+                if(!remaining.empty()){
+                    p temp=*remaining.begin();
+                    K_minimun.insert(temp);
+                    sum+=temp.first;
+                    remaining.erase(temp);
+                }
+
+            }
+            else{
+                remaining.erase(remove);
+            }
+            i++;
+           }
+   return nums[0]+res;
+    }
+};
