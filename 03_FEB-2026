@@ -9,6 +9,7 @@ public:
         for(int i=1;i<n-1;i++){
             // check if at any two consecutive indexes are same then it will become non deceresing and non increaing
             if((nums[i]==nums[i-1]) ||(nums[i]==nums[i+1]))return false;
+     // COUNTING THE BREAK_POINTS
             if((nums[i-1]<nums[i]&&nums[i]>nums[1+i]) ||(nums[i-1]>nums[i]&&nums[i]<nums[1+i])){
                 break_point++;
             }
@@ -16,4 +17,5 @@ public:
         }
         return break_point==2;
     }
+
 };
