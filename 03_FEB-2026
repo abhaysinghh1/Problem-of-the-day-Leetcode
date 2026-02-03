@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool isTrionic(vector<int>& nums) {
+        int n=nums.size();
+        if(nums[0] >= nums[1] ){
+                return false; // always false if it starts decreasing from first  element
+            }
+        int break_point=0;
+        for(int i=1;i<n-1;i++){
+            // check if at any two consecutive indexes are same then it will become non deceresing and non increaing
+            if((nums[i]==nums[i-1]) ||(nums[i]==nums[i+1]))return false;
+            if((nums[i-1]<nums[i]&&nums[i]>nums[1+i]) ||(nums[i-1]>nums[i]&&nums[i]<nums[1+i])){
+                break_point++;
+            }
+             
+        }
+        return break_point==2;
+    }
+};
